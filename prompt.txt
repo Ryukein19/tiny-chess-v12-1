@@ -1,7 +1,0 @@
-Build V12-1 of the tiny chess engine (make.fun tiny-chess-01, 4,096 byte cap).
-
-Base is the v7 engine (16.0/18, mean Elo ~1892). Make ONE change only — the parity budget, research section 2 step V12-1: in `mn()`, line 308, replace the node-budget rule `NL` with the parity form so the engine uses 250k only vs nodes-250k and v7's budget vs nodes-500k:
-
-NL=100000 if op[0]=="d"and op[6]in"23"else 250000 if op[0]=="n"and(op[6]=="2"or NM<=2000 and op[6]in"25")else 150000
-
-Nothing else changes — no recapture extension, no LMR, no IID. Pack the engine to main.py (must stay under 4,096 bytes), verify the round-trip (unpacking main.py reproduces the engine source byte for byte), and validate: determinism 3/3, det checks (startpos b1c3, Italian e1g1, KQ-vs-KR d3e4), perft exact. Then grade all 18 games (t0/t1/t2) against the kit house anchors and re-run any flipped game once to confirm.
